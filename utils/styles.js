@@ -22,7 +22,14 @@ const useStyles = makeStyles({
     minHeight: "80vh",
   },
   footer: {
+    marginTop: 10,
+    marginBottom: 10,
     textAlign: "center",
+  },
+
+  section: {
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
