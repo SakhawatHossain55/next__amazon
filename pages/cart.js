@@ -124,5 +124,4 @@ import {
   );
 }
 
-
 export default dynamic(() => Promise.resolve(CartScreen), {ssr: false});
