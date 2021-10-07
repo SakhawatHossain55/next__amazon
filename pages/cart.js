@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 import React, { useContext } from "react";
+import dynamic from 'next/dynamic';
 import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
 import NextLink from "next/link";
@@ -21,7 +23,7 @@ import {
   Card,
 } from "@material-ui/core";
 
-export default function CartScreen() {
+ function CartScreen() {
   const { state } = useContext(Store);
   console.log(state);
   const {
@@ -86,6 +88,7 @@ export default function CartScreen() {
                           ))}
                         </Select>
                       </TableCell>
+                      <TableCell align="right">${item.price}</TableCell>
                       <TableCell align="right">
                         <Button variant="contained" color="secondary">
                           x
@@ -120,3 +123,6 @@ export default function CartScreen() {
     </Layout>
   );
 }
+
+
+export default dynamic(() => Promise.resolve(CartScreen), {ssr: false});
