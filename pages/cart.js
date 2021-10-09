@@ -134,7 +134,7 @@ function CartScreen() {
               <List>
                 <ListItem>
                   <Typography>
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
+                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}
                     items): $
                     {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                   </Typography>

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const signToken = (user) => {
+    console.log('user', user);
   return jwt.sign(
     {
       _id: user._id,
@@ -8,8 +9,11 @@ const signToken = (user) => {
       email: user.email,
       isAdmin: user.isAdmin,
     },
+
     process.env.JWT_SECRET,
-    { expiresIn: "30d" }
+    {
+      expiresIn: "30d",
+    }
   );
 };
 
