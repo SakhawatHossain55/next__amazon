@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
 import NextLink from "next/link";
-import Image from "next/Image";
+import Image from "next/image";
 import axios from "axios";
 import {
   Typography,
