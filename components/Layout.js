@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 export default function Layout({ children, title, description }) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
+  console.log(state);
   const { darkMode, cart, userInfo } = state;
   const theme = createMuiTheme({
     typography: {
