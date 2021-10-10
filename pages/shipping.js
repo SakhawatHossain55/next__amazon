@@ -12,27 +12,31 @@ import { Store } from "../utils/Store";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
+import CheckoutWizard from "../components/CheckoutWizard";
 
 export default function Shipping() {
   const {
     handleSubmit,
     control,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm();
   const router = useRouter();
   const { redirect } = router.query;
   const { state, dispatch } = useContext(Store);
-  const { userInfo, cart: {shippingAddress} } = state;
+  const {
+    userInfo,
+    cart: { shippingAddress },
+  } = state;
   useEffect(() => {
     if (userInfo) {
       router.push("/login?redirect=/shipping");
     }
-    setValue('fullName', shippingAddress.fullName)
-    setValue('address', shippingAddress.address)
-    setValue('city', shippingAddress.city)
-    setValue('postalCode', shippingAddress.postalCode)
-    setValue('country', shippingAddress.country)
+    setValue("fullName", shippingAddress.fullName);
+    setValue("address", shippingAddress.address);
+    setValue("city", shippingAddress.city);
+    setValue("postalCode", shippingAddress.postalCode);
+    setValue("country", shippingAddress.country);
   }, []);
 
   const classes = useStyles();
@@ -41,11 +45,18 @@ export default function Shipping() {
       type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, city, postalCode, country },
     });
-    Cookies.set("shippingAddress", { fullName, address, city, postalCode, country });
+    Cookies.set("shippingAddress", {
+      fullName,
+      address,
+      city,
+      postalCode,
+      country,
+    });
     router.push(redirect || "/payment");
   };
   return (
     <Layout title="Shipping Address">
+      <CheckoutWizard activeStep={1} />
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">
           Shipping Address

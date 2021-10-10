@@ -28,6 +28,7 @@ export default function Register() {
   const { redirect } = router.query;
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
+  console.log(userInfo);
   useEffect(() => {
     if (userInfo) {
       router.push("/");
