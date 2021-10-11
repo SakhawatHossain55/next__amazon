@@ -5,7 +5,6 @@ import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
 import NextLink from "next/link";
 import Image from "next/image";
-// import axios from "axios";
 import {
   Typography,
   Grid,
@@ -16,19 +15,15 @@ import {
   TableCell,
   TableBody,
   Link,
-  // Select,
-  // MenuItem,
   Button,
   ListItem,
   List,
   Card,
 } from "@material-ui/core";
-// import { useRouter } from "next/router";
 import useStyles from "../utils/styles";
 
 function PlaceOrder() {
   const classes = useStyles();
-  // const router = useRouter();
   const { state } = useContext(Store);
   console.log(state);
   const {
