@@ -29,7 +29,7 @@ export default function Shipping() {
     cart: { shippingAddress },
   } = state;
   useEffect(() => {
-    if (userInfo) {
+    if (!userInfo) {
       router.push("/login?redirect=/shipping");
     }
     setValue("fullName", shippingAddress.fullName);

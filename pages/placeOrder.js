@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
@@ -21,23 +21,63 @@ import {
   Card,
 } from "@material-ui/core";
 import useStyles from "../utils/styles";
+import CheckoutWizard from "../components/CheckoutWizard";
 
 function PlaceOrder() {
   const classes = useStyles();
   const { state } = useContext(Store);
   console.log(state);
   const {
-    cart: { cartItems },
+    cart: { cartItems, shippingAddress, paymentMethod },
   } = state;
+
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.456 => 123.45
+  const itemsPrice = round2(
+    cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+  );
+  const shippingPrice = itemsPrice > 200 ? 0 : 15;
+  const taxPrice = round2(itemsPrice * 0.15);
+  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
+
+  useEffect(() => {
+    if (!paymentMethod) {
+      router.push("/payment");
+    }
+  }, []);
 
   return (
     <Layout title="Shopping Cart">
+      <CheckoutWizard activeStep={3}></CheckoutWizard>
       <Typography component="h1" variant="h1">
         Place Order
       </Typography>
 
       <Grid container spacing={1}>
         <Grid item md={9} xs={12}>
+          <Card className={classes.section}>
+            <List>
+              <ListItem>
+                <Typography component="h2" variant="h2">
+                  Shipping Address
+                </Typography>
+              </ListItem>
+              <ListItem>
+                {shippingAddress.fullName}, {shippingAddress.address},
+                {shippingAddress.city}, {shippingAddress.postalCode},
+                {shippingAddress.country}
+              </ListItem>
+            </List>
+          </Card>
+          <Card className={classes.section}>
+            <List>
+              <ListItem>
+                <Typography component="h2" variant="h2">
+                  Payment Method
+                </Typography>
+              </ListItem>
+              <ListItem>{paymentMethod} </ListItem>
+            </List>
+          </Card>
           <Card className={classes.section}>
             <List>
               <ListItem>
@@ -95,10 +135,54 @@ function PlaceOrder() {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card>
+          <Card className={classes.section}>
             <List>
               <ListItem>
                 <Typography>Order Summary</Typography>
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>Items:</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right">${itemsPrice}</Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>Tax:</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right">${taxPrice}</Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>Shipping:</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right">${shippingPrice}</Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <strong>Total:</strong>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right">
+                      <strong>${totalPrice}</strong>
+                    </Typography>
+                  </Grid>
+                </Grid>
               </ListItem>
               <ListItem>
                 <Button variant="contained" color="primary" fullWidth>

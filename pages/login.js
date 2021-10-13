@@ -23,7 +23,7 @@ export default function Login() {
     control,
     formState: { errors },
   } = useForm();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const { redirect } = router.query; //login?redirect=shipping
   const { state, dispatch } = useContext(Store);
@@ -36,7 +36,7 @@ export default function Login() {
 
   const classes = useStyles();
   const submitHandler = async ({ email, password }) => {
-      closeSnackbar()
+    closeSnackbar();
     try {
       const { data } = await axios.post("/api/users/login", {
         email,
