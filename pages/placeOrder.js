@@ -1,42 +1,44 @@
 /* eslint-disable no-undef */
-import React, { useContext, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import { Store } from "../utils/Store";
-import Layout from "../components/Layout";
-import NextLink from "next/link";
-import Image from "next/image";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import Layout from '../components/Layout';
+import { Store } from '../utils/Store';
+import NextLink from 'next/link';
+import Image from 'next/image';
 import {
-  Typography,
   Grid,
   TableContainer,
   Table,
+  Typography,
   TableHead,
+  TableBody,
   TableRow,
   TableCell,
-  TableBody,
   Link,
-  Button,
-  ListItem,
-  List,
-  Card,
   CircularProgress,
-} from "@material-ui/core";
-import useStyles from "../utils/styles";
-import CheckoutWizard from "../components/CheckoutWizard";
-import { getError } from "../utils/error";
-import { useSnackbar } from 'notistack';
+  Button,
+  Card,
+  List,
+  ListItem,
+} from '@material-ui/core';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import useStyles from '../utils/styles';
+import CheckoutWizard from '../components/CheckoutWizard';
+import { useSnackbar } from 'notistack';
+import { getError } from '../utils/error';
+import Cookies from 'js-cookie';
 
 function PlaceOrder() {
   const classes = useStyles();
-  const { state } = useContext(Store);
-  console.log(state);
+  const router = useRouter();
+  const { state, dispatch } = useContext(Store);
   const {
     userInfo,
     cart: { cartItems, shippingAddress, paymentMethod },
   } = state;
-
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.456 => 123.45
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.456 => 123.46
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
   );
@@ -46,45 +48,46 @@ function PlaceOrder() {
 
   useEffect(() => {
     if (!paymentMethod) {
-      router.push("/payment");
+      router.push('/payment');
+    }
+    if (cartItems.length === 0) {
+      router.push('/cart');
     }
   }, []);
-
   const { closeSnackbar, enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const placeOrderHandler = async () => {
     closeSnackbar();
-    const { data } = await axios.post(
-      "/api/orders",
-      {
-        orderItems: cartItems,
-        shippingAddress,
-        paymentMethod,
-        itemsPrice,
-        shippingPrice,
-        taxPrice,
-        totalPrice,
-      },
-      {
-        header: {
-          authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-    );
-    dispatch({ type: "CART_CLEAR" });
-    Cookies.remove("cartItems");
-    setLoading(false);
     try {
       setLoading(true);
-    } catch (err) {
+      const { data } = await axios.post(
+        '/api/orders',
+        {
+          orderItems: cartItems,
+          shippingAddress,
+          paymentMethod,
+          itemsPrice,
+          shippingPrice,
+          taxPrice,
+          totalPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      dispatch({ type: 'CART_CLEAR' });
+      Cookies.remove('cartItems');
       setLoading(false);
       router.push(`/order/${data._id}`);
-      enqueueSnackbar(getError(err), { variant: "error" });
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
-
   return (
-    <Layout title="Shopping Cart">
+    <Layout title="Place Order">
       <CheckoutWizard activeStep={3}></CheckoutWizard>
       <Typography component="h1" variant="h1">
         Place Order
@@ -100,8 +103,8 @@ function PlaceOrder() {
                 </Typography>
               </ListItem>
               <ListItem>
-                {shippingAddress.fullName}, {shippingAddress.address},
-                {shippingAddress.city}, {shippingAddress.postalCode},
+                {shippingAddress.fullName}, {shippingAddress.address},{' '}
+                {shippingAddress.city}, {shippingAddress.postalCode},{' '}
                 {shippingAddress.country}
               </ListItem>
             </List>
@@ -113,7 +116,7 @@ function PlaceOrder() {
                   Payment Method
                 </Typography>
               </ListItem>
-              <ListItem>{paymentMethod} </ListItem>
+              <ListItem>{paymentMethod}</ListItem>
             </List>
           </Card>
           <Card className={classes.section}>
@@ -176,7 +179,7 @@ function PlaceOrder() {
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography>Order Summary</Typography>
+                <Typography variant="h2">Order Summary</Typography>
               </ListItem>
               <ListItem>
                 <Grid container>
