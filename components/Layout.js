@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import {
   AppBar,
   Container,
-  createMuiTheme,
+  createTheme,
   Link,
   Toolbar,
   Typography,
@@ -27,7 +27,7 @@ export default function Layout({ children, title, description }) {
   console.log(state);
   console.log(state.userInfo);
   const { darkMode, cart, userInfo } = state;
-  const theme = createMuiTheme({
+  const theme = createTheme({
     typography: {
       h1: {
         fontSize: "1.6rem",
