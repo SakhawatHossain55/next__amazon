@@ -42,5 +42,5 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
+const Order = mongoose.models.ProductOrder || mongoose.model("ProductOrder", orderSchema);
 export default Order;

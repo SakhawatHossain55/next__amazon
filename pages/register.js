@@ -28,7 +28,6 @@ export default function Register() {
   const { redirect } = router.query;
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
-  console.log(userInfo);
   useEffect(() => {
     if (userInfo) {
       router.push("/");
@@ -48,7 +47,6 @@ export default function Register() {
         email,
         password,
       });
-      console.log("data", data);
       dispatch({ type: "USER_LOGIN", payload: data });
       Cookies.set("userInfo", data);
       router.push(redirect || "/");

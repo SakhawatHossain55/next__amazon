@@ -646,6 +646,30 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@paypal/paypal-js@^4.1.0":
+  "integrity" "sha512-fBPpNBfzIpn4hWgks+EmZmuwKopkkMRBAtvCuEkH0RQIUobH7Dtf3enyFAt1+u8ZdgdIvueSBB58lRCSP2RNkA=="
+  "resolved" "https://registry.npmjs.org/@paypal/paypal-js/-/paypal-js-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "promise-polyfill" "^8.2.0"
+
+"@paypal/react-paypal-js@^7.4.2":
+  "integrity" "sha512-NYE5SopmMK80h0/hYIr3//iaIjGNHTFxRE9aTo2LzNik75WHu/skUggowHwZHpYWgLi6NYvz7WawRSnesjk6Sw=="
+  "resolved" "https://registry.npmjs.org/@paypal/react-paypal-js/-/react-paypal-js-7.4.2.tgz"
+  "version" "7.4.2"
+  dependencies:
+    "@paypal/paypal-js" "^4.1.0"
+    "@paypal/sdk-constants" "^1.0.110"
+
+"@paypal/sdk-constants@^1.0.110":
+  "integrity" "sha512-W/JvynHo68yVbR5+H3xXncFvucbVmt4PSBifBuGGH8NqDUq8kwOFNaHt0xmUIvWoK77pQjtaulYssty3rnztTw=="
+  "resolved" "https://registry.npmjs.org/@paypal/sdk-constants/-/sdk-constants-1.0.110.tgz"
+  "version" "1.0.110"
+  dependencies:
+    "cross-domain-utils" "^2.0.10"
+    "hi-base32" "^0.5.0"
+    "zalgo-promise" "^1.0.28"
+
 "@popperjs/core@^2.4.4":
   "integrity" "sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.10.2.tgz"
@@ -1323,6 +1347,13 @@
     "ripemd160" "^2.0.0"
     "safe-buffer" "^5.0.1"
     "sha.js" "^2.4.8"
+
+"cross-domain-utils@^2.0.10":
+  "integrity" "sha512-7i7dSDQnzKJ9a7MrUNLzYlrXXJt+R3J0PWRDQbUhSbhuPv7y2fbn0IDV4nm9Zq7ehRIxUq65etQ5xxOkQAyYcA=="
+  "resolved" "https://registry.npmjs.org/cross-domain-utils/-/cross-domain-utils-2.0.36.tgz"
+  "version" "2.0.36"
+  dependencies:
+    "zalgo-promise" "^1.0.11"
 
 "cross-spawn@^7.0.2":
   "integrity" "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w=="
@@ -2119,6 +2150,11 @@
   "integrity" "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="
   "resolved" "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
+
+"hi-base32@^0.5.0":
+  "integrity" "sha512-EmBBpvdYh/4XxsnUybsPag6VikPYnN30td+vQk+GI3qpahVEG9+gTkG0aXVxTjBqQ5T6ijbWIu77O+C5WFWsnA=="
+  "resolved" "https://registry.npmjs.org/hi-base32/-/hi-base32-0.5.1.tgz"
+  "version" "0.5.1"
 
 "hmac-drbg@^1.0.1":
   "integrity" "sha1-0nRXAQJabHdabFRXk+1QL8DGSaE="
@@ -3352,6 +3388,11 @@
   "resolved" "https://registry.npmjs.org/progress/-/progress-2.0.3.tgz"
   "version" "2.0.3"
 
+"promise-polyfill@^8.2.0":
+  "integrity" "sha512-k/TC0mIcPVF6yHhUvwAp7cvL6I2fFV7TzF1DuGPI8mBh4QQazf36xCKEHKTZKRysEoTQoQdKyP25J8MPJp7j5g=="
+  "resolved" "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-8.2.0.tgz"
+  "version" "8.2.0"
+
 "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
@@ -3440,7 +3481,7 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>=16.6.0", "react-dom@17.0.2":
+"react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>=16.3.0", "react-dom@>=16.6.0", "react-dom@17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -3484,7 +3525,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
+"react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -4305,3 +4346,8 @@
   "integrity" "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
+
+"zalgo-promise@^1.0.11", "zalgo-promise@^1.0.28":
+  "integrity" "sha512-LLHANmdm53+MucY9aOFIggzYtUdkSBFxUsy4glTTQYNyK6B3uCPWTbfiGvSrEvLojw0mSzyFJ1/RRLv+QMNdzQ=="
+  "resolved" "https://registry.npmjs.org/zalgo-promise/-/zalgo-promise-1.0.48.tgz"
+  "version" "1.0.48"
