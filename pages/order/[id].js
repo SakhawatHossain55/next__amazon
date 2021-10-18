@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useReducer  } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
 import { Store } from "../../utils/Store";
@@ -16,10 +16,11 @@ import {
   TableRow,
   TableCell,
   Link,
+  CircularProgress,
+  // Button,
   Card,
   List,
   ListItem,
-  CircularProgress,
 } from "@material-ui/core";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -49,7 +50,7 @@ function Order({ params }) {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  const [{ loading, error, order }, dispatch] = useRouter(reducer, {
+  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
     loading: true,
     order: {},
     error: "",
@@ -63,10 +64,6 @@ function Order({ params }) {
     taxPrice,
     shippingPrice,
     totalPrice,
-    isPaid,
-    paidAt,
-    isDelivered,
-    // deliveredAt,
   } = order;
 
   useEffect(() => {
@@ -84,7 +81,7 @@ function Order({ params }) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
-    if (!order._id || (order._id && order.id !== orderId)) {
+    if (!order._id || (order._id && order._id !== orderId)) {
       fetchOrder();
     }
   }, [order]);
@@ -115,12 +112,6 @@ function Order({ params }) {
                   {shippingAddress.city}, {shippingAddress.postalCode},{" "}
                   {shippingAddress.country}
                 </ListItem>
-                <ListItem>
-                  status:{" "}
-                  {isDelivered
-                    ? `delivered ad ${deliveredAt}`
-                    : "not delivered"}
-                </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
@@ -131,9 +122,6 @@ function Order({ params }) {
                   </Typography>
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
-                <ListItem>
-                  status: {isPaid ? `paid ad ${paidAt}` : "not paid"}
-                </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
@@ -251,6 +239,7 @@ function Order({ params }) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
