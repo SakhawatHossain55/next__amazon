@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useReducer  } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
 import { Store } from "../../utils/Store";
@@ -64,6 +64,10 @@ function Order({ params }) {
     taxPrice,
     shippingPrice,
     totalPrice,
+    isPaid,
+    paidAt,
+    isDelivered,
+    deliveredAt,
   } = order;
 
   useEffect(() => {
@@ -112,6 +116,13 @@ function Order({ params }) {
                   {shippingAddress.city}, {shippingAddress.postalCode},{" "}
                   {shippingAddress.country}
                 </ListItem>
+
+                <ListItem>
+                  Status:{" "}
+                  {isDelivered
+                    ? `delivered at ${deliveredAt}`
+                    : "not delivered"}
+                </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
@@ -122,6 +133,9 @@ function Order({ params }) {
                   </Typography>
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
+                <ListItem>
+                  Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
+                </ListItem>
               </List>
             </Card>
             <Card className={classes.section}>
