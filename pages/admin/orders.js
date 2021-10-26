@@ -38,7 +38,7 @@ function reducer(state, action) {
   }
 }
 
-function AdminDashboard() {
+function AdminOrders() {
   const { state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
@@ -90,6 +90,11 @@ function AdminDashboard() {
               <NextLink href="/admin/products" passHref>
                 <ListItem button component="a">
                   <ListItemText primary="Products"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/users" passHref>
+                <ListItem button component="a">
+                  <ListItemText primary="Users"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -161,4 +166,4 @@ function AdminDashboard() {
   );
 }
 
-export default dynamic(() => Promise.resolve(AdminDashboard), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminOrders), { ssr: false });

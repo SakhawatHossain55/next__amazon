@@ -33,10 +33,10 @@ export default function Shipping() {
       return router.push("/login?redirect=/shipping");
     }
     setValue("fullName", shippingAddress?.fullName);
-    setValue("address", shippingAddress.address);
-    setValue("city", shippingAddress.city);
-    setValue("postalCode", shippingAddress.postalCode);
-    setValue("country", shippingAddress.country);
+    setValue("address", shippingAddress?.address);
+    setValue("city", shippingAddress?.city);
+    setValue("postalCode", shippingAddress?.postalCode);
+    setValue("country", shippingAddress?.country);
   }, []);
 
   const classes = useStyles();
@@ -45,13 +45,13 @@ export default function Shipping() {
       type: "SAVE_SHIPPING_ADDRESS",
       payload: { fullName, address, city, postalCode, country },
     });
-    Cookies.set("shippingAddress", {
+    Cookies.set("shippingAddress", JSON.stringify({
       fullName,
       address,
       city,
       postalCode,
       country,
-    });
+    }));
     router.push(redirect || "/payment");
   };
   return (

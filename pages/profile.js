@@ -59,7 +59,7 @@ function Profile() {
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
       dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', data);
+      Cookies.set('userInfo', JSON.stringify(data));
 
       enqueueSnackbar('Profile updated successfully', { variant: 'success' });
     } catch (err) {

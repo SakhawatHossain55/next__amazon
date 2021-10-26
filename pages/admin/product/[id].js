@@ -64,6 +64,7 @@ function ProductEdit({ params }) {
   const {
     handleSubmit,
     control,
+    register,
     formState: { errors },
     setValue,
   } = useForm();
@@ -71,7 +72,7 @@ function ProductEdit({ params }) {
   const router = useRouter();
   const classes = useStyles();
   const { userInfo } = state;
-// console.log('userInfo', userInfo);
+  // console.log('userInfo', userInfo);
   useEffect(() => {
     if (!userInfo) {
       return router.push("/login");
@@ -156,253 +157,214 @@ function ProductEdit({ params }) {
   };
   return (
     <Layout title={`Edit Product ${productId}`}>
-      <Grid container spacing={1}>
-        <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <NextLink href="/admin/dashboard" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Admin Dashboard"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/orders" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="Orders"></ListItemText>
-                </ListItem>
-              </NextLink>
-              <NextLink href="/admin/products" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Products"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
-          </Card>
-        </Grid>
-        <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h1" variant="h1">
-                  Edit Product {productId}
-                </Typography>
-              </ListItem>
-              <ListItem>
-                {loading && <CircularProgress></CircularProgress>}
-                {error && (
-                  <Typography className={classes.error}>{error}</Typography>
-                )}
-              </ListItem>
-              <ListItem>
-                <form
-                  onSubmit={handleSubmit(submitHandler)}
-                  className={classes.form}
-                >
-                  <List>
-                    <ListItem>
-                      <Controller
-                        name="name"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="name"
-                            label="Name"
-                            error={Boolean(errors.name)}
-                            helperText={errors.name ? "Name is required" : ""}
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="slug"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="slug"
-                            label="Slug"
-                            error={Boolean(errors.slug)}
-                            helperText={errors.slug ? "Slug is required" : ""}
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="price"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="price"
-                            label="Price"
-                            error={Boolean(errors.price)}
-                            helperText={errors.price ? "Price is required" : ""}
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="image"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="image"
-                            label="Image"
-                            error={Boolean(errors.image)}
-                            helperText={errors.image ? "Image is required" : ""}
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Button variant="contained" component="label">
-                        Upload File
-                        <input type="file" onChange={uploadHandler} hidden />
-                      </Button>
-                      {loadingUpload && <CircularProgress />}
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="category"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="category"
-                            label="Category"
-                            error={Boolean(errors.category)}
-                            helperText={
-                              errors.category ? "Category is required" : ""
-                            }
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="brand"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="brand"
-                            label="Brand"
-                            error={Boolean(errors.brand)}
-                            helperText={errors.brand ? "Brand is required" : ""}
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="countInStock"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="countInStock"
-                            label="Count in stock"
-                            error={Boolean(errors.countInStock)}
-                            helperText={
-                              errors.countInStock
-                                ? "Count in stock is required"
-                                : ""
-                            }
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
-                    <ListItem>
-                      <Controller
-                        name="description"
-                        control={control}
-                        defaultValue=""
-                        rules={{
-                          // required: true,
-                        }}
-                        render={({ field }) => (
-                          <TextField
-                            variant="outlined"
-                            fullWidth
-                            multiline
-                            id="description"
-                            label="Description"
-                            error={Boolean(errors.description)}
-                            helperText={
-                              errors.description
-                                ? "Description is required"
-                                : ""
-                            }
-                            {...field}
-                          ></TextField>
-                        )}
-                      ></Controller>
-                    </ListItem>
+      <div className="flex items-center justify-center min-h-screen overflow-x-hidden lg:overflow-x-auto lg:overflow-hidden">
+        <div className="flex flex-col flex-wrap justify-between w-full login-container lg:w-4/5 lg:flex-nowrap lg:flex-row group">
+          <div className="order-1 w-full min-h-screen lg:order-2">
+            <div className="relative flex items-center min-h-screen px-10 pt-16 form-wrapper lg:pt-0">
+              <div className="w-full space-y-2">
+                <div className="flex items-end justify-center mb-8 space-x-3 text-center form-caption">
+                  <span className="text-3xl font-semibold text-royal-blue">
+                    Course Update
+                  </span>
+                </div>
+                <form onSubmit={handleSubmit(submitHandler)}>
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Title
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="name"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("name", {
+                            required: {
+                              value: true,
+                              message: "You most enter name",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Slug
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="slug"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("slug", {
+                            required: {
+                              value: true,
+                              message: "You most enter slug",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Category
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="category"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("category", {
+                            required: {
+                              value: true,
+                              message: "You most enter category",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
 
-                    <ListItem>
-                      <Button
-                        variant="contained"
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Price
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="price"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("price", {
+                            required: {
+                              value: true,
+                              message: "You most enter price",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Brand
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="brand"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("brand", {
+                            required: {
+                              value: true,
+                              message: "You most enter brand",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Image
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="image"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("image", {
+                            required: {
+                              value: true,
+                              message: "You most enter image",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <button>
+                    Upload File
+                    <input type="file" onChange={uploadHandler} />
+                  </button>
+                  <div className="form-element">
+                    <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
+                      <span className="block text-lg tracking-wide text-gray-800">
+                        Description
+                      </span>
+                      <span className="block">
+                        <input
+                          type="text"
+                          name="description"
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...register("description", {
+                            required: {
+                              value: true,
+                              message: "You most enter description",
+                            },
+                          })}
+                          className={`block w-full px-4 py-3 placeholder-gray-500 border-gray-300 rounded-md shadow focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2
+               ${errors.name ? "ring-2 ring-red-500" : null}`}
+                        />
+                        <span className="py-2 text-sm text-red-400">
+                          {errors?.name?.message}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="form-element">
+                    <span className="block w-full mx-auto my-4 lg:w-4/5 ">
+                      <input
                         type="submit"
-                        fullWidth
-                        color="primary"
-                      >
-                        Update
-                      </Button>
-                      {loadingUpdate && <CircularProgress />}
-                    </ListItem>
-                  </List>
+                        className="flex w-full px-6 py-3 text-lg text-white bg-indigo-600 border-0 rounded cursor-pointer focus:outline-none hover:bg-aquamarine-800"
+                        value="Update Account"
+                      ></input>
+                    </span>
+                  </div>
                 </form>
-              </ListItem>
-            </List>
-          </Card>
-        </Grid>
-      </Grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 }
