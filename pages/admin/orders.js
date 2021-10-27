@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";

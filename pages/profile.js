@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import axios from 'axios';
 import dynamic from 'next/dynamic';

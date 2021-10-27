@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
