@@ -113,7 +113,6 @@ function AdminProducts() {
     }
   };
   const deleteHandler = async (productId) => {
-    console.log('productId', productId);
     if (!window.confirm("Are you sure?")) {
       return;
     }

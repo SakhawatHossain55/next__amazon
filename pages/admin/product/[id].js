@@ -59,7 +59,6 @@ function ProductEdit({ params }) {
   const router = useRouter();
   const classes = useStyles();
   const { userInfo } = state;
-  // console.log('userInfo', userInfo);
   useEffect(() => {
     if (!userInfo) {
       return router.push("/login");
@@ -70,7 +69,6 @@ function ProductEdit({ params }) {
           const { data } = await axios.get(`/api/admin/products/${productId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
           });
-          console.log(data);
           dispatch({ type: "FETCH_SUCCESS" });
           setValue("name", data.name);
           setValue("slug", data.slug);

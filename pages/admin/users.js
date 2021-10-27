@@ -85,7 +85,6 @@ function AdminUser() {
   const { enqueueSnackbar } = useSnackbar();
 
   const deleteHandler = async (userId) => {
-    console.log("userId", userId);
     if (!window.confirm("Are you sure?")) {
       return;
     }

@@ -49,7 +49,6 @@ function AdminOrders() {
     orders: [],
     error: "",
   });
-  console.log(orders);
 
   useEffect(() => {
     if (!userInfo) {
@@ -61,10 +60,9 @@ function AdminOrders() {
         const { data } = await axios.get(`/api/admin/orders`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
-        console.log("data", data);
+
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
-        console.log(err);
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
