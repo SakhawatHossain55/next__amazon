@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
+
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import { useSnackbar } from "notistack";
 import React, { useEffect, useContext, useReducer } from "react";
 import {
   CircularProgress,
@@ -26,6 +26,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
+import { useSnackbar } from "notistack";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -54,7 +55,7 @@ function reducer(state, action) {
   }
 }
 
-function AdminProducts() {
+function AdminProdcuts() {
   const { state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
@@ -212,7 +213,7 @@ function AdminProducts() {
                             <TableCell>{product.category}</TableCell>
                             <TableCell>{product.countInStock}</TableCell>
                             <TableCell>{product.rating}</TableCell>
-                            <TableCell>
+                            <TableCell className={classes.edit}> 
                               <NextLink
                                 href={`/admin/product/${product._id}`}
                                 passHref
@@ -244,4 +245,4 @@ function AdminProducts() {
   );
 }
 
-export default dynamic(() => Promise.resolve(AdminProducts), { ssr: false });
+export default dynamic(() => Promise.resolve(AdminProdcuts), { ssr: false });

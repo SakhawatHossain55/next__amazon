@@ -45,6 +45,9 @@ const useStyles = makeStyles({
   error: {
     color: "#f04040",
   },
+  edit: {
+    display: "flex",
+  },
   fullWidth: {
     width: "100%",
   },

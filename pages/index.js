@@ -39,7 +39,7 @@ export default function Home(props) {
       <div className="my-10">
         <Grid container spacing={3}>
           {products.map((product) => (
-            <Grid item md={4} key={product.name}>
+            <Grid item md={3} sm={6} key={product.name}>
               <Card>
                 <NextLink href={`/product/${product.slug}`} passHref>
                   <CardActionArea>

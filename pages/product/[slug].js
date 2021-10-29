@@ -49,16 +49,16 @@ export default function ProductScreen(props) {
         </NextLink>
       </div>
       <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
+        <Grid item md={5} xs={12}>
           <Image
             src={product.image}
             alt={product.name}
-            width={640}
-            height={640}
+            width={600}
+            height={540}
             layout="responsive"
           />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={4} xs={12}>
           <List>
             <ListItem>
               <Typography component="h1" variant="h1">
