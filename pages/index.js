@@ -36,8 +36,7 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <div>
-        <h1>Product</h1>
+      <div className="my-10">
         <Grid container spacing={3}>
           {products.map((product) => (
             <Grid item md={4} key={product.name}>
