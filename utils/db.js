@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-console.log(process.env.MONGO_URI);
+
 const connection = {};
 
 async function connect() {
@@ -15,10 +15,10 @@ async function connect() {
     }
     await mongoose.disconnect();
   }
-  const db = await mongoose.connect(process.env.MONGO_URI, {
+  const db = await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    // useCreateIndex: true,
+    useCreateIndex: true,
   });
   console.log('new connection');
   connection.isConnected = db.connections[0].readyState;
@@ -35,10 +35,11 @@ async function disconnect() {
   }
 }
 
+
 function convertDocToObj(doc) {
   doc._id = doc._id.toString();
   doc.createdAt = doc.createdAt.toString();
-  doc.updatedAt = doc.createdAt.toString();
+  doc.updatedAt = doc.updatedAt.toString();
   return doc;
 }
 
