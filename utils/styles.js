@@ -9,6 +9,10 @@ const useStyles = makeStyles({
     },
   },
 
+  footer: {
+    backgroundColor: "#203040",
+  },
+
   brand: {
     fontWeight: "bold",
     fontSize: "1.5rem",
@@ -20,11 +24,6 @@ const useStyles = makeStyles({
 
   main: {
     minHeight: "80vh",
-  },
-  footer: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: "center",
   },
 
   section: {
@@ -45,6 +44,9 @@ const useStyles = makeStyles({
   },
   error: {
     color: "#f04040",
+  },
+  edit: {
+    display: "flex",
   },
   fullWidth: {
     width: "100%",

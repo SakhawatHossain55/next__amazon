@@ -11,6 +11,7 @@ import { Store } from "../../../utils/Store";
 import Layout from "../../../components/Layout";
 import useStyles from "../../../utils/styles";
 import { Controller, useForm } from "react-hook-form";
+import { useSnackbar } from "notistack";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -70,6 +71,7 @@ function ProductEdit({ params }) {
           const { data } = await axios.get(`/api/admin/products/${productId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
           });
+          console.log(data);
           dispatch({ type: "FETCH_SUCCESS" });
           setValue("name", data.name);
           setValue("slug", data.slug);
@@ -154,7 +156,7 @@ function ProductEdit({ params }) {
                   </span>
                 </div>
                 <form onSubmit={handleSubmit(submitHandler)}>
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Title
@@ -179,7 +181,7 @@ function ProductEdit({ params }) {
                       </span>
                     </label>
                   </div>
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Slug
@@ -204,7 +206,7 @@ function ProductEdit({ params }) {
                       </span>
                     </label>
                   </div>
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Category
@@ -230,7 +232,7 @@ function ProductEdit({ params }) {
                     </label>
                   </div>
 
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Price
@@ -255,7 +257,7 @@ function ProductEdit({ params }) {
                       </span>
                     </label>
                   </div>
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Brand
@@ -281,7 +283,7 @@ function ProductEdit({ params }) {
                     </label>
                   </div>
 
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Image
@@ -310,7 +312,7 @@ function ProductEdit({ params }) {
                     Upload File
                     <input type="file" onChange={uploadHandler} />
                   </button>
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <label className="space-y-0.5 w-full lg:w-4/5 block mx-auto">
                       <span className="block text-lg tracking-wide text-gray-800">
                         Description
@@ -336,7 +338,7 @@ function ProductEdit({ params }) {
                     </label>
                   </div>
 
-                  <div className="form-element">
+                  <div className="text-black form-element">
                     <span className="block w-full mx-auto my-4 lg:w-4/5 ">
                       <input
                         type="submit"
