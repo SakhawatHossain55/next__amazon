@@ -23,9 +23,11 @@ import {
   ListItem,
   Divider,
   ListItemText,
+  InputBase,
 } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import CancelIcon from '@material-ui/icons/Cancel';
+import SearchIcon from '@material-ui/icons/Search';
 import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 import { Store } from "../utils/Store";
@@ -86,6 +88,16 @@ export default function Layout({ children, title, description }) {
     fetchCategories();
   }, []);
 
+
+  const [query, setQuery] = useState('');
+  const queryChangeHandler = (e) => {
+    setQuery(e.target.value);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
+  };
+
   const darkModeChangeHandler = () => {
     dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
     const newDarkMode = !darkMode;
@@ -127,6 +139,7 @@ export default function Layout({ children, title, description }) {
                 edge="start"
                 aria-label="open drawer"
                 onClick={sidebarOpenHandler}
+                className={classes.menuButton}
               >
                 <MenuIcon className={classes.navbarButton} />
               </IconButton>
@@ -176,7 +189,25 @@ export default function Layout({ children, title, description }) {
                 ))}
               </List>
             </Drawer>
-            <div className={classes.grow}></div>
+
+            <div className={classes.searchSection}>
+              <form onSubmit={submitHandler} className={classes.searchForm}>
+                <InputBase
+                  name="query"
+                  className={classes.searchInput}
+                  placeholder="Search products"
+                  onChange={queryChangeHandler}
+                />
+                <IconButton
+                  type="submit"
+                  className={classes.iconButton}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
+              </form>
+            </div>
+
             <div>
               <Switch
                 checked={darkMode}
