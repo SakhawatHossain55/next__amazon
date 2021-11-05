@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState } from "react";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -184,16 +185,18 @@ export default function Layout({ children, title, description }) {
               <NextLink href="/cart" passHref>
                 <Link>
                   <Typography component="span">
-                    {cart.cartItems.length > 0 ? (
-                      <Badge
-                        color="secondary"
-                        badgeContent={cart.cartItems.length}
-                      >
-                        Cart
-                      </Badge>
-                    ) : (
-                      "Cart"
-                    )}
+                    <Typography component="span">
+                      {cart.cartItems.length > 0 ? (
+                        <Badge
+                          color="secondary"
+                          badgeContent={cart.cartItems.length}
+                        >
+                          Cart
+                        </Badge>
+                      ) : (
+                        'Cart'
+                      )}
+                    </Typography>
                   </Typography>
                 </Link>
               </NextLink>
