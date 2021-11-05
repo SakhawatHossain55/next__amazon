@@ -71,5 +71,3 @@ handler.use(isAuth).post(async (req, res) => {
 });
 
 export default handler;
-
-
