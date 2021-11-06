@@ -388,27 +388,27 @@ export default function Layout({ children, title, description }) {
                   <div className="mt-2">
                     <ul className="">
                       <li className="py-1 text-lg font-normal">
-                        <a className="text-white" href="#">
+                        <a className="text-white" href="https://www.facebook.com/sakawat.hossain.338211">
                           Facebook
                         </a>
                       </li>
                       <li className="py-1 text-lg font-normal">
-                        <a className="text-white" href="#">
+                        <a className="text-white" href="https://twitter.com/Sakhawa14416902">
                           Twitter
                         </a>
                       </li>
                       <li className="py-1 text-lg font-normal">
-                        <a className="text-white" href="#">
+                        <a className="text-white" href="https://www.instagram.com/sakhawat.hossain.2677">
                           Instagram
                         </a>
                       </li>
                       <li className="py-1 text-lg font-normal">
-                        <a className="text-white" href="#">
+                        <a className="text-white" href="https://www.youtube.com">
                           YouTube
                         </a>
                       </li>
                       <li className="py-1 text-lg font-normal">
-                        <a className="text-white" href="#">
+                        <a className="text-white" href="https://github.com/sakhawat9">
                           Github
                         </a>
                       </li>
